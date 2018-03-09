@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    background-color: #9f9fdd;
+}
+
+.drawer {
+
+    background-color: #c0dd9f;
+}
+
+header, footer {
+    display: flex;
+    background-color: #b97878;
+}

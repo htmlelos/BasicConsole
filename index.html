@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consola de Servidor Basico</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <section class="drawer">
+        <nav>
+            <ul>
+                <li><a href="#">Organización</a></li>
+                <li><a href="#">Modulos</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Configuración</a></li>
+            </ul>
+        </nav>
+    </section>
+    <section class="content">
+        <header>
+            <img src="./img/logo.png" alt="Logo">
+            <h1>Title</h1>
+        </header>
+        <main>
+            <ul id="usuarios">                
+            </ul>
+        </main>
+        <footer>
+            &copy;  2018
+        </footer>
+    </section>
+    <script>
+        window.addEventListener('load', function() {
+            fetch('http://localhost:3000/users')
+                .then(function(response) { return response.json() })
+                .then(function(result) { 
+                    for(let i = 0; i < result.users.length; i++) {
+                        const doc = document.querySelector('main ul#usuarios')
+                        let element = document.createElement('li')
+                        let text = document.createTextNode(result.users[i].name)
+                        element.appendChild(text)
+                        doc.appendChild(element)
+                    }
+                })
+                .catch(function(error) { console.error('ERROR: ', error)})
+        })
+    </script>
+</body>
+</html>
