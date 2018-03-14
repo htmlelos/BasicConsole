@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Consola de Servidor Basico</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
     <section class="drawer">
         <nav>
@@ -20,32 +22,36 @@
     </section>
     <section class="content">
         <header>
-            <img src="./img/logo.png" alt="Logo">
+            <img src="http://via.placeholder.com/64x64" alt="Logo">
             <h1>Title</h1>
         </header>
         <main>
-            <ul id="usuarios">                
+            <ul id="usuarios">
             </ul>
         </main>
         <footer>
-            &copy;  2018
+            &copy; 2018
         </footer>
     </section>
     <script>
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             fetch('http://localhost:3000/users')
-                .then(function(response) { return response.json() })
-                .then(function(result) { 
-                    for(let i = 0; i < result.users.length; i++) {
-                        const doc = document.querySelector('main ul#usuarios')
-                        let element = document.createElement('li')
-                        let text = document.createTextNode(result.users[i].name)
-                        element.appendChild(text)
-                        doc.appendChild(element)
-                    }
+                .then(function (response) {
+                    return response.json()
                 })
-                .catch(function(error) { console.error('ERROR: ', error)})
+                .then(function (result) {
+                    const doc = document.querySelector('main ul#usuarios')
+                    let content = ''
+                    result.users.map(user => {
+                        content += `<li>${user.name} ${user.email}</li>`
+                    })
+                    doc.innerHTML = content
+                })
+                .catch(function (error) {
+                    console.error('ERROR: ', error)
+                })
         })
     </script>
 </body>
+
 </html>
