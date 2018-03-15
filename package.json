@@ -1,0 +1,16 @@
+{
+  "name": "BasicConsole",
+  "version": "0.0.1",
+  "description": "Consola Basica",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "main": "server.js",
+  "repository": "https://github.com/htmlelos/BasicConsole.git",
+  "author": "Sergio Lucero <sergiolucero73@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pug": "^2.0.1"
+  }
+}
