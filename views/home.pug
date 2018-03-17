@@ -6,6 +6,25 @@ html
     link(rel="stylesheet",href="/static/css/index.css")
     
   body
-    include layouts/content-layout.pug
-    script(defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous")
-    script(defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous")
+    .main__container
+      header.header__container
+        .button__container.left
+          span 
+            i.fas.fa-bars
+        .header__title Consola
+        .button__container.right
+          span
+            i.fas.fa-ellipsis-v
+      main.content__container
+        .card__container
+          .card__content Contenido Tarjeta
+        .card__container
+          .card__content Contenido Tarjeta
+        .card__container
+          .card__content Contenido Tarjeta
+        .card__container
+          .card__content Contenido Tarjeta
+      footer.footer__container
+        .footer__content Pie de Pagina &copy; 2018
+    script(src="/static/js/fontawesome-all.js")
+    

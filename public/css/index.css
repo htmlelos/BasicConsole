@@ -1,32 +1,52 @@
 body {
-    display: flex;
-    padding: 0;
+    background-color: #ccc;
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    flex-direction: column;
-    /* justify-content: space-around; */
-    /* align-content: space-around; */
+    height: 100%;
 }
 
-header {
+.main__container {
+    margin: 0;
     display: flex;
-    /* justify-content: flex-start; */
-    align-items: center;
-    background-color: aqua;
-    flex: 1 0;
-    height: 4em;
+    flex-direction: column;
+    height: 100%;
 }
-
-footer {
-    background-color: blueviolet;
-    height: 3em;
-    /* justify-content: flex-end; */
-}
-
-header svg#header__logo {
+.button__container {
     padding: 0 1em;
 }
-header h1 {
-    padding: 0 0.5
-    em;
+.left {
+    /* align-self: flex-start; */
+    justify-self: center;
+}
+.header__container {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0077BE;
+    color: #fff;
+}
+.content__container {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    color: #949494;
+}
+.card__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    margin: 6px;
+    border:1px solid #a9a9a9;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: #d3d3d3;
+    color: #949494;
 }
