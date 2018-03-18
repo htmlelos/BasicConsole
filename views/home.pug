@@ -6,25 +6,54 @@ html
     link(rel="stylesheet",href="/static/css/index.css")
     
   body
+    .overlay#overlay(onclick="closeNav()")
+      .side__menu#side-menu
+        ul.menu__container
+          li.menu__item
+            span
+              i.fas.fa-building
+            a(href="#") Empresa
+          li.menu__item
+            span
+              i.fas.fa-cubes
+            a(href="#") Modulos
+          li.menu__item
+            span
+              i.fas.fa-user
+            a(href="#") Usuarios
+          li.menu__item
+            span
+              i.fas.fa-cubes
+            a(href="#") Modulos
     .main__container
       header.header__container
         .button__container.left
-          span 
-            i.fas.fa-bars
+          span(onclick="openNav()")
+            a(href="#")
+              i.fas.fa-bars
         .header__title Consola
         .button__container.right
           span
-            i.fas.fa-ellipsis-v
+            a(href="#")
+              i.fas.fa-ellipsis-v
       main.content__container
         .card__container
-          .card__content Contenido Tarjeta
+          .card__content
+            i.fas.fa-building.fa-2x
+            span empresa
         .card__container
-          .card__content Contenido Tarjeta
+          .card__content
+            i.fas.fa-cubes.fa-2x
+            span modulos
         .card__container
-          .card__content Contenido Tarjeta
+          .card__content
+            i.fas.fa-user.fa-2x
+            span usuarios
         .card__container
-          .card__content Contenido Tarjeta
+          .card__content
+            i.fas.fa-user.fa-2x
+            span modulos
       footer.footer__container
         .footer__content Pie de Pagina &copy; 2018
     script(src="/static/js/fontawesome-all.js")
-    
+    script(src="/static/js/index.js")
