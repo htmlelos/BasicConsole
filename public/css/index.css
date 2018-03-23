@@ -60,6 +60,68 @@ body {
     padding: 1em;
 }
 
+.card__content {
+    width: 100%;
+}
+
+.list__container {
+    list-style-type: none;
+}
+
+.list__items {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list__column {
+    display: flex;
+    align-self: flex-start;
+    width: 100%;
+}
+
+.table__container {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table__header {
+    background-color: #0077BE;
+    color: #fff;
+}
+
+.table__header .table__row,
+.table__header .table__column {
+    padding: 1em;    
+}
+
+.table__content .table__row,
+.table__content .table__column {
+    padding: 0 1em;    
+}
+
+.table__row:nth-child(even) {
+    background-color: #fff;
+}
+
+.table__column {
+    width: 50%;
+}
+
+.table__footer .table__row,
+.table__footer .table__column {
+    padding: .75em;
+    width: 50%;
+}
+
+.table__row {
+}
+
+.table__footer {
+    width: 100%;
+    background-color: #0077BE;
+    color: #fff;
+}
+
 .footer__container {
     display: flex;
     justify-content: center;

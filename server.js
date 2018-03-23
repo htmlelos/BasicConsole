@@ -12,19 +12,19 @@ server.use('/static', express.static(path.join(__dirname, "public")))
 //Rutas
 server.get('/', function (request, response) {
     // console.log('INICIO');
-    response.render('home', { title: 'Titulo', message: 'Hola Mundo!' })
+    response.render('home', { title: 'Consola' })
 })
 
 server.get('/users', function (request, response) {
     console.log('UI_USER');
 
     fetch('http://localhost:3000/users', { method: 'GET', headers: {} })
-        .then(function(response) {return response.json()})
-        .then(function(result){
+        .then(function (response) { return response.json() })
+        .then(function (result) {
             console.log(result.users);
-            response.render('users', {users: result.users})
+            response.render('users', { title: 'Usuarios', list: result.users })
         })
-        .catch(function(error){
+        .catch(function (error) {
             response.render('error')
         })
 })

@@ -5,7 +5,29 @@ html
     title!= title
     link(rel="stylesheet",href="/static/css/index.css")    
   body
-    h1 Usuarios
-    ul
-        each user in users
-            li= user.name
+    include layouts/components/header-container.pug
+    .card__container
+      .card__content
+        table.table__container
+          thead.table__header
+            tr.table__row      
+              - let column = Object.keys(list[0])
+              each col in column 
+                td.table__column= col                
+          tbody.table__content
+            each item in list
+              tr.table__row
+                td.table__column= item.name
+                td.table__column= item.password
+                td.table__column= item.email
+          tfoot.table__footer
+            tr.table__row
+              td.table__column Pie de la tabla              
+        //- ul.list__container
+          each item in list
+            li.list__items
+              div.list__column= item.name
+              div.list__column= item.password
+              div.list__column= item.email
+
+    script(src="/static/js/fontawesome-all.js")
