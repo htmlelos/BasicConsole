@@ -1,4 +1,17 @@
-header.header__container
+nav.navbar.is-primary(role="navigation" aria-label="navegacion principal")
+  .navbar-brand
+    .title= title
+    //- .navbar-burger
+    span.icon
+      i.fas.fa-bars.fa-2x
+  .navbar-menu
+    //- .navbar-start
+    .navbar-end
+      .navbar-item Usuario
+      .navbar-item Password
+      .navbar-item Desconectar
+
+//- header.header__container
     .button__container.left
       span(onclick="openNav()")
         a(href="#")
