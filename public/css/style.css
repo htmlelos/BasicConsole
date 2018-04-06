@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;    
+}
+
+.container {
+    width: 100%;
+}
+
+.menu {
+    width: 20%;
+}
+
+.page {
+    width: 80%;
+}

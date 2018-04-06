@@ -1,11 +1,93 @@
-html
-  head
-    meta(charset="UTF-8") 
-    meta(name="viewport",content="width=device-width, initial-scale=1.0")
-    title!= title
-    //- link(rel="stylesheet",href="/static/css/index.css")
-    link(rel="stylesheet",href="/static/css/bulma.css")
-  body
-    include layouts/side-menu.pug
-    include layouts/main-container.pug
-    include layouts/scripts.pug
+head
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  link(rel="stylesheet", href="static/css/bulma.css")
+  link(rel="stylesheet", href="static/css/style.css")
+body
+  .wrapper
+    .menu
+      header.hero.is-info.is-bold
+        .hero-body
+          .container
+            span
+              i.fas.fa-arrow-left.fa-2x
+            h1.title= title
+            h2.subtitle= subtitle
+      aside.menu
+        p.menu-label
+        ul.menu-list
+          li
+            a(href="#")
+              span
+                i.fas.fa-building.fa-2x
+              span Empresa            
+          li
+            a(href="#")
+              span
+                i.fas.fa-cubes.fa-2x
+              span Modulos
+          li
+            a(href="#")
+              span
+                i.fas.fa-users.fa-2x
+              span Usuarios
+    .page
+      header.hero.is-primary.is-bold
+        .hero-body
+          .container
+            span
+              i.fas.fa-bars.fa-2x
+            h1.title= title
+            h2.subtitle= subtitle
+      main
+        .container
+          .notification.is-success.is-widescreen.is-invisible Mensaje de éxito
+          section.section
+            .columns
+              a(href="#").column.is-one-quarter
+                .card
+                  .card-header
+                    .card-header-icon
+                      .span
+                        i.fas.fa-building.fa-2x
+                    .card-header-title Empresa
+                  .card-content 
+                    p Configurar las empresas que pueden utilizar el sistema.
+              a(href="#").column.is-one-quarter
+                .card
+                  .card-header
+                    .card-header-icon
+                      .span
+                        i.fas.fa-cubes.fa-2x
+                    .card-header-title Modulos
+                  .card-content 
+                    p Configurar los modulos utilizados por las empresas del sistema.
+              a(href="#").column.is-one-quarter
+                .card
+                  .card-header
+                    .card-header-icon
+                      .span
+                        i.fas.fa-users.fa-2x
+                    .card-header-title Usuarios
+                  .card-content 
+                    p Configurar los usuarios de cada empresa que utilizan el sistema.
+              a(href="#").column.is-one-quarter
+                .card
+                  .card-header
+                    .card-header-icon
+                      .span
+                        i.fas.fa-lock.fa-2x
+                    .card-header-title Permisos
+                  .card-content 
+                    p Configurar los permisos de los usuarios de cada empresa que utilizan el sistema.
+              a(href="#").column.is-one-quarter
+                .card
+                  .card-header
+                    .card-header-icon
+                      .span
+                        i.fas.fa-address-card.fa-2x
+                    .card-header-title Perfiles
+                  .card-content 
+                    p Configurar los perfiles de los usuarios de cada empresa que utilizan el sistema.
+      footer.footer
+        .container Footer
+  script(src="static/js/fontawesome-all.js")
