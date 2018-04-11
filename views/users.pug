@@ -1,0 +1,73 @@
+head
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  link(rel="stylesheet", href="static/css/bulma.css")
+body
+  .columns.is-gapless
+    .column.is-one-quarter.is-paddingless.is-hidden-mobile
+      header.hero.is-dark.is-bold
+        .hero-body
+          .container
+            .span
+              i.fas.fa-arrow-left.fa-2x
+            h1.title= title
+            h2.subtitle= subtitle
+      aside.menu
+        p.menu-label ADMINISTRACION
+        ul.menu-list
+          li
+            a(href="#")
+              span.icon.is-large
+                i.fas.fa-building.fa-2x
+              span Empresa
+          li
+            a(href="#")
+              span.icon.is-large
+                i.fas.fa-cubes.fa-2x
+              span Modulos
+          li
+            a(href="http://localhost:4000/users")
+              span.icon.is-large
+                i.fas.fa-users.fa-2x
+              span Usuarios
+          li
+            a(href="#")
+              span.icon.is-large
+                i.fas.fa-lock.fa-2x
+              span Permisos
+          li
+            a(href="#")
+              span.icon.is-large
+                i.fas.fa-id-card.fa-2x
+              span Perfiles 
+    .column
+      header.hero.is-primary.is-bold
+        .hero-body
+          .container
+            .span
+              i.fas.fa-arrow-left.fa-2x
+            h1.title= title
+            h2.subtitle= subtitle
+      .container
+        table.table.is-striped.is-fullwidth
+          thead
+            tr
+              th
+                div &nbsp;
+              th
+                div Nombre
+              th
+                div Password
+              th
+                div Email
+          tbody
+            each user in list
+              tr
+                td
+                  a(href="http://localhost:4000/users/" + user._id)
+                    span.icon
+                      i.fas.fa-edit                    
+                td= user.name
+                td= user.password
+                td= user.email
+          tfoot
+  script(src="static/js/fontawesome-all.js")            
