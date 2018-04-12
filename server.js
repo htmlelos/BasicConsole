@@ -13,7 +13,6 @@ server.use('/static', express.static(path.join(__dirname, 'public')))
 server.use(cors())
 //Rutas
 server.get('/', function (request, response) {
-    // console.log('INICIO');
     response.render('home', {
         title: 'Consola'
     })
@@ -32,7 +31,6 @@ server.get('/users', function (request, response) {
             return result.json()
         })
         .then(function (json) {
-            // console.log(json.users);
             response.render('users', {
                 title: 'Usuarios',
                 list: json.users
@@ -44,27 +42,27 @@ server.get('/users', function (request, response) {
 })
 
 server.get('/users/:userId', function (request, response) {
-    const body = {
-        fields: '_id name password email'
-    }
     const userId = request.params.userId;
-    console.log('USER_ID', userId);
     fetch('http://localhost:3000/users/' + userId, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
     .then(function (result) {
-            console.log('RESPONSE', result);
             return result.json()
         })
-    .then(function (json) {
-            console.log('USER_JSON', json);
+    .then(function (user) {
             response.render('edit', {
                 title: 'Editar',
-                user: json
+                user: user
             })
         })
 })
+
+// server.post('/users', function (request, response) {
+//     const body = {
+//         fields: ''
+//     }
+// })
 
 server.listen(4000, function () {
     console.log('Servidor ejecutandose en el puerto 4000');

@@ -1,14 +1,15 @@
 head
   meta(name="viewport", content="width=device-width, initial-scale=1.0")
   link(rel="stylesheet", href="../static/css/bulma.css")
-body
+body.is-fullhd
   .columns.is-gapless
     .column.is-one-quarter.is-paddingless.is-hidden-mobile
       header.hero.is-dark.is-bold
         .hero-body
           .container
-            .span
-              i.fas.fa-arrow-left.fa-2x
+            a(href="http://localhost:4000/")
+              .span
+                i.fas.fa-arrow-left.fa-2x
             h1.title= title
             h2.subtitle= subtitle
       aside.menu
@@ -44,15 +45,47 @@ body
         .hero-body
           .container
             .span
-              i.fas.fa-arrow-left.fa-2x
+              i.fas.fa-edit.fa-2x
             h1.title= title
             h2.subtitle= subtitle
       .container
         .card
           .card-header= title
           .card-content
+            -var newUser = user
             .field
               label.label Nombre
-            .control
-              input.input(type="text" placeholde="Ingrese un nombre" value=user.name)
-  script(src="../static/js/fontawesome-all.js")      
+              .control
+                input.input(type="text" placeholde="Ingrese un nombre" value=newUser.name)
+            .field
+              label.label Password
+              .control
+                input.input(type="password" placeholde="Ingrese un nombre" value=newUser.password)
+            .field
+              label.label Correo
+              .control
+                input.input(type="text" placeholde="Ingrese un nombre" value=newUser.email)
+          .card-footer
+            .card-footer-item
+              a.button.is-white
+                span.icon
+                  i.fas.fa-ban
+                span Cancelar
+            if user._id
+              .card-footer-item
+                a.button.is-inverted.is-danger
+                  span.icon
+                    i.fas.fa-times
+                  span Eliminar
+              .card-footer-item
+                a.button.is-inverted.is-success
+                  span.icon
+                    i.fas.fa-check
+                  span Guardar
+            else
+              .card-footer-item
+                a.button.is-inverted.is-success
+                  span.icon
+                    i.fas.fa-check
+                  span Confirmar
+  script(src="../static/js/fontawesome-all.js")
