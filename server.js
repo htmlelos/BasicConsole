@@ -37,7 +37,7 @@ server.get('/users', function (request, response) {
             })
         })
         .catch(function (error) {
-            response.render('error')
+            response.render('users', {message:'Usuarios no encontrados'})
         })
 })
 
@@ -56,6 +56,9 @@ server.get('/users/:userId', function (request, response) {
                 user: user
             })
         })
+    .catch(function(error) {
+        response.render('user', {message:'Usuario no encontrado'})
+    })
 })
 
 // server.post('/users', function (request, response) {
