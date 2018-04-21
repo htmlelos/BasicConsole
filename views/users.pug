@@ -48,31 +48,39 @@ body
             h1.title= title
             h2.subtitle= subtitle
       .container
-        if message !== nil
-          .notification.is-danger
-            button.delete            
-            p= message
-        else
-          table.table.is-striped.is-fullwidth
-            thead
-              tr
-                th
-                  div &nbsp;
-                th
-                  div Nombre
-                th
-                  div Password
-                th
-                  div Email
-            tbody
-              each user in list
+        .card
+          .card-content
+            if message !== nil
+              .notification.is-danger
+                button.delete            
+                p= message
+            else
+            table.table.is-striped.is-fullwidth
+              thead
                 tr
-                  td
-                    a(href="http://localhost:4000/users/" + user._id)
-                      span.icon
-                        i.fas.fa-edit                    
-                  td= user.name
-                  td= user.password
-                  td= user.email
-            tfoot
+                  th
+                    div &nbsp;
+                  th
+                    div Nombre
+                  th
+                    div Password
+                  th
+                    div Email
+              tbody
+                each user in list
+                  tr
+                    td
+                      a(href="http://localhost:4000/users/edit/" + user._id)
+                        span.icon
+                          i.fas.fa-edit                    
+                    td= user.name
+                    td= user.password
+                    td= user.email
+              tfoot
+            .card-footer
+              .card-footer-item
+                a(href="http://localhost:4000/user/new").button.is-info.is-inverted
+                  span.icon
+                    i.fas.fa-plus
+                  span Nuevo Usuario
   script(src="static/js/fontawesome-all.js")            
