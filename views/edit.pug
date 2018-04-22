@@ -49,11 +49,15 @@ body.is-fullhd
             h1.title= title
             h2.subtitle= subtitle
       .container.is-marginless
-        form#user-detail(method="POST" action="/")
+        form#user-detail(method="POST" action="/users/save")
           .card
             .card-header= title
             .card-content
                 -var newUser = user
+                .field
+                  label.label.is-hidden Id
+                  .control
+                    input.input(type="hidden" name="id" value=newUser._id)
                 .field
                   label.label Nombre
                   .control
@@ -74,20 +78,17 @@ body.is-fullhd
                   span Cancelar
               if user._id
                 .card-footer-item
-                  a.button.is-inverted.is-danger
+                  a(href="http://localhost:400/users/delete/"+newUser._id).button.is-inverted.is-danger
                     span.icon
                       i.fas.fa-times
                     span Eliminar
                 .card-footer-item
-                  a.button.is-inverted.is-success
+                  input.button.is-inverted.is-success(type="submit" value="Guardar")
+                  //- a.button.is-inverted.is-success
                     span.icon
                       i.fas.fa-check
                     span Guardar
               else
                 .card-footer-item
-                  //- a(href="https://localhost:4000/users/confirmar").button.is-inverted.is-success
-                  input.button.is-inverted.is-success(type="submit" value='Enviar')
-                    //- span.icon
-                    //-   i.fas.fa-check
-                    //- span Confirmar
-  script(src="../static/js/fontawesome-all.js")
+                  input.button.is-inverted.is-success(type="submit" value='Confirmar')
+  script(src="../../static/js/fontawesome-all.js")

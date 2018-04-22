@@ -27,10 +27,12 @@ server.get('/users', function (request, response) {
         fields: '_id name password email'
     }
     fetch('http://localhost:3000/users', {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' }
-    })
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         .then(function (result) {
             return result.json()
         })
@@ -41,55 +43,95 @@ server.get('/users', function (request, response) {
             })
         })
         .catch(function (error) {
-            response.render('users', {message:'Usuarios no encontrados'})
+            response.render('users', {
+                message: 'Usuarios no encontrados'
+            })
         })
 })
 
 server.get('/users/edit/:userId', function (request, response) {
     const userId = request.params.userId;
     fetch('http://localhost:3000/users/' + userId, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    })
-    .then(function (result) {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function (result) {
             return result.json()
         })
-    .then(function (user) {
+        .then(function (user) {
             response.render('edit', {
                 title: 'Editar',
                 user: user
             })
         })
-    .catch(function(error) {
-        response.render('user', {message:'Usuario no encontrado'})
-    })
+        .catch(function (error) {
+            response.render('user', {
+                message: 'Usuario no encontrado'
+            })
+        })
 })
 
 const jsonParser = bodyParser.json();
-const urlencoderParser = bodyParser.urlencoded({extended: false})
-
-server.get('/user/new', function (request, response) {
-    response.render('edit', {user:{}})
+const urlencoderParser = bodyParser.urlencoded({
+    extended: false
 })
 
-server.post('/', urlencoderParser, function(request, response) {
+server.get('/user/new', function (request, response) {
+    response.render('edit', {
+        user: {}
+    })
+})
+
+server.post('/users/save', urlencoderParser, function (request, response) {
     const user = request.body;
-    fetch('http://localhost:3000/user', {
+    if (user.id === '' || user.id === null || user.id === undefined) {
+      fetch('http://localhost:3000/user', {
         method: 'POST',
         body: JSON.stringify(user),
-        headers: {'Content-Type':'application/json'}
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(function (result) {            
+        return result.json();
+      })
+      .then(function (user) {
+        response.redirect('http://localhost:4000/users');
+      })
+      .catch(function (error) {
+        response.end();
+      })
+    } else {
+      fetch('http://localhost:3000/users/'+user.id, {
+        method: 'PUT',
+        body: JSON.stringify(user),
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(function (result) {        
+        return result.json();
+      })
+      .then(function (user) {
+        response.redirect('http://localhost:4000/users');
+      })
+      .catch(function (error) {
+        response.end();
+      })
+    }
+})
+
+server.get('/users/delete/:userId', function (request, response) {
+    const userId = request.params.userId
+    fetch('http://localhost:3000/users/'+userId, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
     })
     .then(function (result) {
         return result.json()
-        console.log('RESULT--', result)
     })
-    .then(function(user) {
+    .then(function (json) {
         response.redirect('http://localhost:4000/users');
-        // response.end();
     })
-    .catch(function(error) {
-        // response.render('users', {message: 'No se pudo crear el usuario'})
-        console.log('ERROR', error);
+    .catch(function (error) {
         response.end();
     })
 })
