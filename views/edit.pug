@@ -4,87 +4,31 @@ html
   body.is-fullhd
     .columns.is-gapless
       .column.is-one-quarter.is-paddingless.is-hidden-mobile
-        header.hero.is-dark.is-bold
-          .hero-body
-            .container
-              a(href="http://localhost:4000/users")
-                .span
-                  i.fas.fa-arrow-left.fa-2x
-              h1.title= title
-              h2.subtitle= subtitle
-        aside.menu
-          p.menu-label ADMINISTRACION
-          ul.menu-list
-            li
-              a(href="#")
-                span.icon.is-large
-                  i.fas.fa-building.fa-2x
-                span Empresa
-            li
-              a(href="#")
-                span.icon.is-large
-                  i.fas.fa-cubes.fa-2x
-                span Modulos
-            li
-              a(href="http://localhost:4000/users")
-                span.icon.is-large
-                  i.fas.fa-users.fa-2x
-                span Usuarios
-            li
-              a(href="#")
-                span.icon.is-large
-                  i.fas.fa-lock.fa-2x
-                span Permisos
-            li
-              a(href="#")
-                span.icon.is-large
-                  i.fas.fa-id-card.fa-2x
-                span Perfiles 
+        include includes/header.pug
+        include includes/sidemenu.pug
       .column
-        header.hero.is-primary.is-bold
-          .hero-body
-            .container
-              .span
-                i.fas.fa-edit.fa-2x
-              h1.title= title
-              h2.subtitle= subtitle
+        include includes/header.pug
         .container.is-marginless
           form#user-detail(method="POST" action="/users-save")
             .card
               .card-header= title
               .card-content
                   -var newUser = user
-                  .field
-                    label.label.is-hidden Id
-                    .control
-                      input.input(type="hidden" name="id" value=newUser._id)
-                  .field
-                    label.label Nombre
-                    .control
-                      input.input(type="text" name="name" placeholder="Ingrese un nombre" value=newUser.name)
-                  .field
-                    label.label Password
-                    .control
-                      input.input(type="password" name="password" placeholder="Ingrese un nombre" value=newUser.password)
-                  .field
-                    label.label Correo
-                    .control
-                      input.input(type="text" name="email" placeholder="Ingrese un nombre" value=newUser.email)
+                  include includes/field.pug
+                  +field("Id", true, "hidden", newUser._id)
+                  +field("Nombre", false, "text", newUser.name)
+                  +field("Password", false, "password", newUser.password)
+                  +field("Correo", false, "email", newUser.email)
               .card-footer
+                include includes/button.pug
                 .card-footer-item
-                  a(href="http://localhost:4000/users").button.is-white
-                    span.icon
-                      i.fas.fa-ban
-                    span Cancelar
+                  +button("Cancelar", "http://localhost:4000/users", true)(class="fa-ban")
                 if user._id
                   .card-footer-item
-                    a(href="http://localhost:400/users-delete/"+newUser._id).button.is-inverted.is-danger
-                      span.icon
-                        i.fas.fa-times
-                      span Eliminar
+                    +button("Eliminar", "http://localhost:400/users-delete/"+newUser._id, true)(class="fa-times")
                   .card-footer-item
-                    input.button.is-inverted.is-success(type="submit" value="Guardar")
+                    +button("Guardar")
                 else
                   .card-footer-item
-                    input.button.is-inverted.is-success(type="submit" value='Confirmar')
+                    +button("Confirmar")
     script(src="../../static/js/fontawesome-all.js")

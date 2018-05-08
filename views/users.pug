@@ -20,9 +20,10 @@ html
                   table.table.is-striped.is-fullwidth
                     include includes/tablehead.pug
                       include includes/headercolumn.pug
-                      - var columns = ["\&nbsp\;","Nombre","Password","Email","Eliminar"]
+                      - var columns = ["","Nombre","Password","Email","Eliminar"]
                       each column in columns
-                        +tablecolumn(column)
+                        include includes/tablecolumn.pug
+                        +headercolumn(column)
                     tbody
                       each user in list
                         tr
@@ -40,8 +41,6 @@ html
                     tfoot
             .card-footer
               .card-footer-item
-                a(href="http://localhost:4000/user-new").button.is-info.is-inverted
-                  span.icon
-                    i.fas.fa-plus
-                  span Nuevo Usuario
+                include includes/button.pug
+                +button("Nuevo Usuario", "http://localhost:4000/user-new", true)(class="fa-plus")                
     script(src="static/js/fontawesome-all.js")            

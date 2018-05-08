@@ -1,0 +1,8 @@
+mixin button(name, href, link)
+  if link===true
+    a(href=href).button.is-inverted.is-danger
+      span.icon
+        i(class=attributes.class).fas
+      span= name
+  else
+    input.button.is-inverted.is-success(type="submit" value=name)
