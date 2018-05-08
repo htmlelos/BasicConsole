@@ -1,98 +1,18 @@
-head
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  link(rel="stylesheet", href="static/css/bulma.css")
-body
-  .columns
-    .column.is-one-quarter.is-paddingless.is-hidden-mobile
-      header.hero.is-dark.is-bold
-        .hero-body
-          .container
-            .span
-              i.fas.fa-arrow-left.fa-2x
-            h1.title= title
-            h2.subtitle= subtitle
-      aside.menu
-        p.menu-label ADMINISTRACION
-        ul.menu-list
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-building.fa-2x
-              span Empresa
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-cubes.fa-2x
-              span Modulos
-          li
-            a(href="http://localhost:4000/users")
-              span.icon.is-large
-                i.fas.fa-users.fa-2x
-              span Usuarios
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-lock.fa-2x
-              span Permisos
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-id-card.fa-2x
-              span Perfiles              
-    .column.is-paddingless
-      header.hero.is-primary.is-bold
-        .hero-body
-          .container
-            .span
-              i.fas.fa-bars.fa-2x
-            h1.title= title
-            h2.subtitle= subtitle
-      main
-        .container.is-marginless
-          .columns.is-multiline.is-gapless
-            a(href="#").column.is-one-third
-              .card
-                .card-header
-                  .card-header-icon
-                    span.icon.is-large
-                      i.fas.fa-building.fa-2x
-                  .card-header-title Empresa
-                .card-content
-                  p Configurar las empresas que pueden utilizar el sistema.
-            a(href="#").column.is-one-third
-              .card
-                .card-header
-                  .card-header-icon
-                    span.icon.is-large
-                      i.fas.fa-cubes.fa-2x
-                  .card-header-title Modulos
-                .card-content
-                  p Configurar las empresas que pueden utilizar el sistema.
-            a(href="http://localhost:4000/users").column.is-one-third
-              .card
-                .card-header
-                  .card-header-icon
-                    span.icon.is-large
-                      i.fas.fa-users.fa-2x
-                  .card-header-title Usuarios
-                .card-content
-                  p Configurar las empresas que pueden utilizar el sistema.
-            a(href="#").column.is-one-third
-              .card
-                .card-header
-                  .card-header-icon
-                    span.icon.is-large
-                      i.fas.fa-lock.fa-2x
-                  .card-header-title Permisos
-                .card-content
-                  p Configurar las empresas que pueden utilizar el sistema.
-            a(href="#").column.is-one-third
-              .card
-                .card-header
-                  .card-header-icon
-                    span.icon.is-large
-                      i.fas.fa-id-card.fa-2x
-                  .card-header-title Perfiles
-                .card-content
-                  p Configurar las empresas que pueden utilizar el sistema.            
-  script(src="static/js/fontawesome-all.js")
+doctype html
+html
+  include includes/head.pug
+  body
+    .columns
+      .column.is-one-quarter.is-paddingless.is-hidden-mobile
+        include includes/header.pug
+        include includes/sidemenu.pug
+      .column.is-paddingless
+        include includes/header.pug
+        main
+          .container.is-marginless
+            .columns.is-multiline.is-gapless
+              - var menus = [{href:'#', icon:"fa-building", title:"Empresa", description:"Configurar las empresas que pueden utilizar el sistema."},{href:'#', icon:"fa-cubes", title:"Modulos", description:"Configurar los modulos que pueden utiliza el sistema."},{href:'http://localhost:4000/users', icon:"fa-user", title:"Usuarios", description:"Configurar los usuarios del sistema."},{href:'#', icon:"fa-lock", title:"Permisos", description:"Configurar los permisos que possen los usuarios del sistema."},{href:'#', icon:"fa-id-card", title:"Perfiles", description:"Configurar los perfiles que pueden utilizar los usuarios del sistema."}]
+              each menu in menus
+                include includes/card.pug
+                +card(menu)(class=menu.icon)          
+    script(src="static/js/fontawesome-all.js")

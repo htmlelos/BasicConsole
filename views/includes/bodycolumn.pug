@@ -1,0 +1,8 @@
+mixin bodycolumn(item, link)
+  td
+  if link
+    a(href="http://localhost:4000/users-edit/" + item._id)
+      span.icon
+        i.fas.fa-edit
+  else
+    td= item

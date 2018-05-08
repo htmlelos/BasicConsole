@@ -1,0 +1,7 @@
+aside.menu
+  p.menu-label ADMINISTRACION
+  ul.menu-list
+    - var items = [{href:'#', icon:"fa-building", title:"Empresa"},{href:'#', icon:"fa-cubes", title:"Modulos"},{href:'http://localhost:4000/users', icon:"fa-user", title:"Usuarios"},{href:'#', icon:"fa-lock", title:"Permisos"},{href:'#', icon:"fa-id-card", title:"Perfiles"}]
+    each item in items
+      include itemmenu.pug    
+      +itemmenu(item)(class=item.icon)

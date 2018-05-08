@@ -1,94 +1,90 @@
-head
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  link(rel="stylesheet", href="../../static/css/bulma.css")
-body.is-fullhd
-  .columns.is-gapless
-    .column.is-one-quarter.is-paddingless.is-hidden-mobile
-      header.hero.is-dark.is-bold
-        .hero-body
-          .container
-            a(href="http://localhost:4000/users")
+doctype html
+html
+  include includes/head.pug
+  body.is-fullhd
+    .columns.is-gapless
+      .column.is-one-quarter.is-paddingless.is-hidden-mobile
+        header.hero.is-dark.is-bold
+          .hero-body
+            .container
+              a(href="http://localhost:4000/users")
+                .span
+                  i.fas.fa-arrow-left.fa-2x
+              h1.title= title
+              h2.subtitle= subtitle
+        aside.menu
+          p.menu-label ADMINISTRACION
+          ul.menu-list
+            li
+              a(href="#")
+                span.icon.is-large
+                  i.fas.fa-building.fa-2x
+                span Empresa
+            li
+              a(href="#")
+                span.icon.is-large
+                  i.fas.fa-cubes.fa-2x
+                span Modulos
+            li
+              a(href="http://localhost:4000/users")
+                span.icon.is-large
+                  i.fas.fa-users.fa-2x
+                span Usuarios
+            li
+              a(href="#")
+                span.icon.is-large
+                  i.fas.fa-lock.fa-2x
+                span Permisos
+            li
+              a(href="#")
+                span.icon.is-large
+                  i.fas.fa-id-card.fa-2x
+                span Perfiles 
+      .column
+        header.hero.is-primary.is-bold
+          .hero-body
+            .container
               .span
-                i.fas.fa-arrow-left.fa-2x
-            h1.title= title
-            h2.subtitle= subtitle
-      aside.menu
-        p.menu-label ADMINISTRACION
-        ul.menu-list
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-building.fa-2x
-              span Empresa
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-cubes.fa-2x
-              span Modulos
-          li
-            a(href="http://localhost:4000/users")
-              span.icon.is-large
-                i.fas.fa-users.fa-2x
-              span Usuarios
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-lock.fa-2x
-              span Permisos
-          li
-            a(href="#")
-              span.icon.is-large
-                i.fas.fa-id-card.fa-2x
-              span Perfiles 
-    .column
-      header.hero.is-primary.is-bold
-        .hero-body
-          .container
-            .span
-              i.fas.fa-edit.fa-2x
-            h1.title= title
-            h2.subtitle= subtitle
-      .container.is-marginless
-        form#user-detail(method="POST" action="/users/save")
-          .card
-            .card-header= title
-            .card-content
-                -var newUser = user
-                .field
-                  label.label.is-hidden Id
-                  .control
-                    input.input(type="hidden" name="id" value=newUser._id)
-                .field
-                  label.label Nombre
-                  .control
-                    input.input(type="text" name="name" placeholder="Ingrese un nombre" value=newUser.name)
-                .field
-                  label.label Password
-                  .control
-                    input.input(type="password" name="password" placeholder="Ingrese un nombre" value=newUser.password)
-                .field
-                  label.label Correo
-                  .control
-                    input.input(type="text" name="email" placeholder="Ingrese un nombre" value=newUser.email)
-            .card-footer
-              .card-footer-item
-                a(href="http://localhost:4000/users").button.is-white
-                  span.icon
-                    i.fas.fa-ban
-                  span Cancelar
-              if user._id
+                i.fas.fa-edit.fa-2x
+              h1.title= title
+              h2.subtitle= subtitle
+        .container.is-marginless
+          form#user-detail(method="POST" action="/users-save")
+            .card
+              .card-header= title
+              .card-content
+                  -var newUser = user
+                  .field
+                    label.label.is-hidden Id
+                    .control
+                      input.input(type="hidden" name="id" value=newUser._id)
+                  .field
+                    label.label Nombre
+                    .control
+                      input.input(type="text" name="name" placeholder="Ingrese un nombre" value=newUser.name)
+                  .field
+                    label.label Password
+                    .control
+                      input.input(type="password" name="password" placeholder="Ingrese un nombre" value=newUser.password)
+                  .field
+                    label.label Correo
+                    .control
+                      input.input(type="text" name="email" placeholder="Ingrese un nombre" value=newUser.email)
+              .card-footer
                 .card-footer-item
-                  a(href="http://localhost:400/users/delete/"+newUser._id).button.is-inverted.is-danger
+                  a(href="http://localhost:4000/users").button.is-white
                     span.icon
-                      i.fas.fa-times
-                    span Eliminar
-                .card-footer-item
-                  input.button.is-inverted.is-success(type="submit" value="Guardar")
-                  //- a.button.is-inverted.is-success
-                    span.icon
-                      i.fas.fa-check
-                    span Guardar
-              else
-                .card-footer-item
-                  input.button.is-inverted.is-success(type="submit" value='Confirmar')
-  script(src="../../static/js/fontawesome-all.js")
+                      i.fas.fa-ban
+                    span Cancelar
+                if user._id
+                  .card-footer-item
+                    a(href="http://localhost:400/users-delete/"+newUser._id).button.is-inverted.is-danger
+                      span.icon
+                        i.fas.fa-times
+                      span Eliminar
+                  .card-footer-item
+                    input.button.is-inverted.is-success(type="submit" value="Guardar")
+                else
+                  .card-footer-item
+                    input.button.is-inverted.is-success(type="submit" value='Confirmar')
+    script(src="../../static/js/fontawesome-all.js")
