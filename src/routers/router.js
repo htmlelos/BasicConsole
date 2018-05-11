@@ -6,73 +6,68 @@ const router = (server) => {
   server.get('/', (request, response) => {response.render('home', {title: 'Consola'})
   })
 
-  server.get('/users', (request, response) => {
-    const body = {
-        fields: '_id name password email'
+  server.get('/users', async (request, response) => {
+    const body = { fields: '_id name password email' }
+    try {
+      const options = { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' }}
+      const result = await fetch('http://localhost:3000/users', options)
+      const json = await result.json();
+      response.render('users', {title: 'Usuarios', list: json.users})
+    } catch (error) {
+      response.render('users', {message: 'Usuarios no encontrados'})
     }
-    fetch('http://localhost:3000/users', {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(result =>  result.json())
-        .then(json => response.render('users', {title: 'Usuarios', list: json.users}))
-        .catch(error => response.render('users', {message: 'Usuarios no encontrados'})
-        )
   })
 
-  server.get('/users-edit/:userId', (request, response) => {
-  const userId = request.params.userId;
-  fetch(`http://localhost:3000/user/${userId}`, {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'}
-      })
-      .then(result => result.json())
-      .then(user => {console.log('USER==', user); response.render('edit', {title: 'Editar', user})})
-      .catch(error => response.render('user', {message: 'Usuario no encontrado'}))
+  server.get('/users-edit/:userId', async (request, response) => {
+    const userId = request.params.userId;
+    try {
+      const options = { method: 'GET', headers: {'Content-Type': 'application/json'}}
+      const result = await fetch(`http://localhost:3000/user/${userId}`, options)
+      const user = await result.json()
+      response.render('edit', {title: 'Editar', user})
+    } catch (error) {
+      response.render('user', {message: 'Usuario no encontrado'})
+    }
   })
 
   server.get('/user-new', (request, response) => {
     response.render('edit', { user: {} })
   })
 
-  server.post('/users-save', middleware.urlencoderParser, (request, response) => {
+  server.post('/users-save', middleware.urlencoderParser, async (request, response) => {
     const user = request.body;
     if (user.id === '' || user.id === null || user.id === undefined) {
-      fetch('http://localhost:3000/user', {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {'Content-Type': 'application/json'}
-      })
-      .then(result => result.json())
-      .then(user => response.redirect('http://localhost:4000/users'))
-      .catch(error => response.end())
+      try {
+        const options = { method: 'POST', body: JSON.stringify(user), headers: {'Content-Type': 'application/json'}}
+        const result = await fetch('http://localhost:3000/user', options)
+        const newUser = await result.json()
+        response.redirect('http://localhost:4000/users')
+      } catch (error) {
+        response.end()
+      }
     } else {
-      console.log('USER>>', user);
-      fetch('http://localhost:3000/user/'+user.id, {
-        method: 'PUT',
-        body: JSON.stringify(user),
-        headers: {'Content-Type': 'application/json'}
-      })
-      .then(result => result.json())
-      .then(user => response.redirect('http://localhost:4000/users'))
-      .catch(error => response.end())
+      try {
+        const options = { method: 'PUT', body: JSON.stringify(user), headers: {'Content-Type': 'application/json'}}
+        const result = await fetch('http://localhost:3000/user/'+user.id, options)
+        const newUser = await result.json()
+        response.redirect('http://localhost:4000/users')
+      } catch (error) {
+        response.end()
+      }
     }
   })
 
-  server.get('/users-delete/:userId', (request, response) => {
+  server.get('/users-delete/:userId', async (request, response) => {
     const userId = request.params.userId
-    fetch('http://localhost:3000/user/'+userId, {
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'}
-    })
-    .then(result => result.json())
-    .then(json => response.redirect('http://localhost:4000/users'))
-    .catch(error => response.end())
+    try {
+      const options = { method: 'DELETE', headers: {'Content-Type': 'application/json'}}
+      const result = await fetch('http://localhost:3000/user/'+userId, options)
+      const newUser = await result.json()
+      response.redirect('http://localhost:4000/users')
+    } catch (error) {
+      response.end()
+    }
   })
-
 }
 
 module.exports = router;
