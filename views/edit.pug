@@ -13,19 +13,21 @@ html
             .card
               .card-header= title
               .card-content
-                  -var newUser = user
+                  -var newUser= user||{_id:null, name:'', password: '', email: ''}
+                  //- pre
+                  //-   code= JSON.stringify(newUser)
                   include includes/field.pug
-                  +field("Id", true, "hidden", newUser._id)
-                  +field("Nombre", false, "text", newUser.name)
-                  +field("Password", false, "password", newUser.password)
-                  +field("Correo", false, "email", newUser.email)
+                  +field("ID","id", true, "hidden", newUser._id)
+                  +field("Nombre", "name", false, "text", newUser.name)
+                  +field("Contraseña","password", false, "password", newUser.password)
+                  +field("Correo","email", false, "email", newUser.email)
               .card-footer
                 include includes/button.pug
                 .card-footer-item
                   +button("Cancelar", "http://localhost:4000/users", true)(class="fa-ban")
-                if user._id
+                if newUser
                   .card-footer-item
-                    +button("Eliminar", "http://localhost:400/users-delete/"+newUser._id, true)(class="fa-times")
+                    +button("Eliminar", "http://localhost:4000/users-delete/"+newUser._id, true)(class="fa-times")
                   .card-footer-item
                     +button("Guardar")
                 else

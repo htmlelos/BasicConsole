@@ -17,7 +17,7 @@ const router = (server) => {
                 'Content-Type': 'application/json'
             }
         })
-        .then(result => result.json())
+        .then(result =>  result.json())
         .then(json => response.render('users', {title: 'Usuarios', list: json.users}))
         .catch(error => response.render('users', {message: 'Usuarios no encontrados'})
         )
@@ -25,12 +25,12 @@ const router = (server) => {
 
   server.get('/users-edit/:userId', (request, response) => {
   const userId = request.params.userId;
-  fetch(`http://localhost:3000/users/${userId}`, {
+  fetch(`http://localhost:3000/user/${userId}`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'}
       })
       .then(result => result.json())
-      .then(user => response.render('edit', {title: 'Editar',user: user}))
+      .then(user => {console.log('USER==', user); response.render('edit', {title: 'Editar', user})})
       .catch(error => response.render('user', {message: 'Usuario no encontrado'}))
   })
 
@@ -50,7 +50,8 @@ const router = (server) => {
       .then(user => response.redirect('http://localhost:4000/users'))
       .catch(error => response.end())
     } else {
-      fetch('http://localhost:3000/users/'+user.id, {
+      console.log('USER>>', user);
+      fetch('http://localhost:3000/user/'+user.id, {
         method: 'PUT',
         body: JSON.stringify(user),
         headers: {'Content-Type': 'application/json'}
@@ -63,7 +64,7 @@ const router = (server) => {
 
   server.get('/users-delete/:userId', (request, response) => {
     const userId = request.params.userId
-    fetch('http://localhost:3000/users/'+userId, {
+    fetch('http://localhost:3000/user/'+userId, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     })

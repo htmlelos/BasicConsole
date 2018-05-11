@@ -1,8 +1,8 @@
-mixin field(name, visible, type, data)
+mixin field(label, name, visible, type, data)
   .field
-    if visible===is-hidden
-      label.label.is-hidden= name
+    if visible
+      label.label.is-hidden= label
     else
-      label.label= name
+      label.label= label
     .control
-      input.input(type= type name= name value= data)
+    input.input(type= type name= name value= data)
